@@ -1,0 +1,128 @@
+environment:
+  cmd_mode: 1
+  max_t: 20.0
+  obstacles: Obstacles
+  sim_dt: 0.02
+  state_buffer_size: 10
+  thrust_max: 3.61
+  thrust_min: 0.0
+  tracks:
+  - SplitS_demo
+  traversal_threshold: 1.0
+  tube_radius: 10.0
+  use_camera: true
+extra_infos:
+  components:
+  - flightmode
+  - traversal_err
+  - simtime
+  - gateview
+  - gate_cx
+  - gate_cy
+imitation:
+  batch_size: 2000
+  optimizer: adam
+  tcn_dropout: 0.1
+  tcn_hidden_units: 30
+  tcn_hist_length: 100
+  tcn_kernel_size: 7
+  tcn_learning_rate: 1e-3
+  tcn_num_level: 8
+main:
+  num_envs: 1
+  num_threads: 3
+  pub_port: 10253
+  random_init: 1
+  render: no
+  scene_id: 0
+  seed: 1
+  sub_port: 10254
+ppo:
+  batch_size: 25000
+  clip_range: 0.2
+  ent_coef: 0.005
+  gae_lambda: 0.95
+  gamma: 0.99
+  learning_rate: 3e-4
+  log_std_init: 0.0
+  max_grad_norm: 0.5
+  n_epochs: 10
+  n_iterations: 5000
+  n_steps: 250
+  net_arch_pi:
+  - 128
+  - 128
+  net_arch_vf:
+  - 128
+  - 128
+  vf_coef: 0.5
+quadrotor_dynamics:
+  arm_l: 0.15
+  inertia:
+  - 0.0025
+  - 0.0021
+  - 0.0043
+  kappa: 0.022
+  mass: 0.752
+  motor_omega_max: 2333.0
+  motor_omega_min: 150.0
+  motor_tau: 0.033
+  omega_max:
+  - 8.0
+  - 8.0
+  - 4.0
+  tbm_bl:
+  - -0.075
+  - 0.1
+  - 0.0
+  tbm_br:
+  - -0.075
+  - -0.1
+  - 0.0
+  tbm_fl:
+  - 0.075
+  - 0.1
+  - 0.0
+  tbm_fr:
+  - 0.075
+  - -0.1
+  - 0.0
+  thrust_map:
+  - 1.562522e-06
+  - 0.0
+  - 0.0
+randomization:
+  delay: 0.1
+  max_act_buffer: 30
+  random_init_pos: true
+rewards:
+  coefs:
+    delta_act: 0.5
+    gate_view_coef: 1.0
+    omega_x: 0.0
+    omega_y: 0.0
+    vel_norm: 0.0
+    velocity_reward: 1.0
+    yaw_coef: 0.1
+  components:
+  - velocity_reward
+  - vel_norm
+  - delta_act
+  - omega_z
+  - total_rew
+rgb_camera:
+  channels: 3
+  enable_depth: false
+  enable_opticalflow: false
+  enable_segmentation: false
+  fov: 120.0
+  height: 1080
+  r_BC:
+  - 45.0
+  - 0.0
+  - 180.0
+  t_BC:
+  - 0.0
+  - 0.0
+  - 0.3
+  width: 1920

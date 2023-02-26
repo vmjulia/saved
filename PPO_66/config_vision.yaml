@@ -1,0 +1,95 @@
+main:
+  seed: 1
+  scene_id: 0  # 0 warehouse, 1 garage, 3 natureforest
+  num_envs: 1
+  num_threads: 3
+  render: no
+  pub_port: 10253
+  sub_port: 10254
+  random_init: 0
+
+ppo:
+  log_std_init: 0.0
+  net_arch_pi: [128, 128]
+  net_arch_vf: [128, 128]
+  gae_lambda: 0.95
+  gamma: 0.99
+  n_steps: 250
+  ent_coef: 0.005
+  learning_rate: 3e-4
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  batch_size: 25000
+  n_epochs: 10
+  clip_range: 0.2
+  n_iterations: 5000
+
+quadrotor_dynamics:
+  mass: 0.752
+  arm_l: 0.15                           # redundant number, delete it at some point
+  tbm_fr: [0.075, -0.10, 0.0]           # [m]
+  tbm_bl: [-0.075, 0.10, 0.0]           # [m]
+  tbm_br: [-0.075, -0.10, 0.0]          # [m]
+  tbm_fl: [0.075, 0.10, 0.0]            # [m
+  omega_max: [8.0, 8.0, 4.0]
+  inertia: [0.0025, 0.0021, 0.0043]
+  kappa: 0.022
+  motor_omega_min: 150.0
+  motor_omega_max: 2333.0
+  motor_tau: 0.033
+  thrust_map: [1.562522e-6, 0.0, 0.0] # max thrust = 8.50 N 
+
+environment:
+  sim_dt: 0.02
+  max_t: 20.0 # can change for shorter
+  tube_radius: 10.0
+  traversal_threshold: 1.0
+  use_camera: yes
+  state_buffer_size: 10
+  tracks: [SplitS_demo]
+  obstacles: Obstacles
+  cmd_mode: 1          # 0 single rotor, 1 body rate, 2 force torque          
+  thrust_min: 0.0
+  thrust_max: 3.61     # 1.6~2.95; 2.5~4.61; 3.3~6.082; 3.7~6.824; 4.0~7.377; 4.5~8.299;
+
+# define reward components and their coefficients 
+rewards:
+  components: [velocity_reward, vel_norm, delta_act, bodyrate_norm, total_rew]
+  coefs:
+    delta_act: 0.5
+    gate_view_coef: 0.0
+    omega_x: 2.0
+    omega_y: 2.0
+    vel_norm: 0.0
+    velocity_reward: 1.0
+    yaw_coef: 0.0
+
+# log extra infors during training for debug
+extra_infos:
+  components: [flightmode, traversal_err, simtime, gateview, gate_cx, gate_cy]
+
+rgb_camera:
+  t_BC: [0.0, 0.0, 0.3]    # translational vector of the camera with repect to the body frame
+  r_BC: [45.0, 0.0, 180.0]   # rotational angle (roll, pitch, yaw) of the camera in degree.
+  channels: 3
+  width: 1920
+  height: 1080
+  fov: 120.0
+  enable_depth: no
+  enable_segmentation: no
+  enable_opticalflow: no
+
+imitation:
+  tcn_kernel_size: 7
+  tcn_num_level: 8
+  tcn_hidden_units: 30
+  tcn_dropout: 0.1
+  tcn_learning_rate: 1e-3
+  tcn_hist_length: 100
+  batch_size: 2000 # can increase for longer training
+  optimizer: adam
+
+randomization:
+  delay: 0.1
+  max_act_buffer: 30
+  random_init_pos: yes
