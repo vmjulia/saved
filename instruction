@@ -50,3 +50,14 @@
    77  pip install .
    78  cd ..
    79  cd flightpy/
+80  ls
+   81  cd ..
+   82  PYTHONPATH=./flightpy/ python flightpy/examples/racing/run_drone_racing_torch.py 
+   83  pip install pyquaternion
+   84  PYTHONPATH=./flightpy/ python flightpy/examples/racing/run_drone_racing_torch.py 
+   85  pip install numpy-quaternion
+   86  PYTHONPATH=./flightpy/ python flightpy/examples/racing/run_drone_racing_torch.py 
+   87  PYTHONPATH=./flightpy/ python flightpy/examples/racingv/run_vision_racing_torch.py 
+   88  vi flightlib/
+   89  vi flightpy/
+   90  history
