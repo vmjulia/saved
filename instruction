@@ -1,0 +1,52 @@
+  28  ls
+   29* m -rf anaconda3/
+   30  cd Downloads
+   31  ls
+   32  bash Anaconda3-2022.10-Linux-x86_64.sh
+   33  conda --version
+   34  conda initi
+   35  conda init
+   36  conda --version
+   37  conda activate test
+   38  cd flightmare_internal 
+   39  ls
+   40  cd flightpy
+   41  ls
+   42  cd examples
+   43  ls
+   44  python3 run_drone_control_torch.py train==1
+   45  python3 run_drone_control_torch.py --train 1
+   46  python3 run_drone_control_torch.py --train 0
+   47  pip install tensorboard
+   48  python3 run_drone_control_torch.py --train 0
+   49  python3 run_drone_control_torch.py --train 1
+   50  ls
+   51  python3 run_drone_control_tf.py --train 0
+   52  python3 run_drone_control_torch.py --train 1
+   53  pip install tensorboard
+   54  conda install -c conda-forge tensorboard
+   55  python3 run_drone_control_torch.py --train 1
+   56  python --version
+   57  ls
+   58  cd ..
+   59  ld
+   60  ls
+   61  git diff
+   62  conda deactivate
+   63  conda env -n fly python=3.7
+   64  conda env --name fly python=3.7
+   65  conda env create --name fly python=3.7
+   66  conda env create --name fly python==3.7
+   67  conda create --name fly python==3.7
+   68  git checkout ..
+   69  git checkout fix/random_objs 
+   70  conda activate fly
+   71  ls
+   72  pip install -e stable-baselines3/
+   73  conda install -c conda-forge tensorboard
+   74  cd ..
+   75  cd flightlib/
+   76  pip install scikit-build
+   77  pip install .
+   78  cd ..
+   79  cd flightpy/
